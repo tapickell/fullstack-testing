@@ -13,10 +13,11 @@ function deepEqual(value1, value2) {
 
 module.exports = {
   assert: function(expected, actual, message = "Test") {
-    if (deepEqual(expected, actual)) {
+    if (expected === actual) {
       console.log('👍  ' + message)
     } else {
-      console.log('💩  ' + message + "\n   Assertion failed no match\n   " + util.inspect(expected) + "\n   " + util.inspect(actual));
+      diff = util.inspect(expected) + "\n   " + util.inspect(actual);
+      console.log('💩  ' + message + "\n   Assertion failed no match\n   " + diff);
     }
   },
   assert_true: function(actual, message) {
