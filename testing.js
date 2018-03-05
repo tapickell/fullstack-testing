@@ -1,3 +1,5 @@
+var util = require('util');
+
 function isObject(value) {
   return typeof value === "object" && value != null
 }
@@ -13,7 +15,7 @@ function deepEqual(value1, value2) {
 
 module.exports = {
   assert: function(expected, actual, message = "Test") {
-    if (expected === actual) {
+    if (deepEqual(expected, actual)) {
       console.log('👍  ' + message)
     } else {
       diff = util.inspect(expected) + "\n   " + util.inspect(actual);
@@ -21,9 +23,9 @@ module.exports = {
     }
   },
   assert_true: function(actual, message) {
-    assert(true, actual, message)
+    this.assert(true, actual, message)
   },
   assert_false: function(actual, message) {
-    assert(false, actual, message)
+    this.assert(false, actual, message)
   }
 };
